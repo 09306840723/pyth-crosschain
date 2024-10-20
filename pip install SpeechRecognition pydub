@@ -1,0 +1,19 @@
+import speech_recognition as sr
+from pydub import AudioSegment
+
+recognizer = sr.Recognizer()
+
+# تبدیل فرمت فایل صوتی
+sound = AudioSegment.from_file("path/to/your/audiofile.mp3")
+sound.export("path/to/your/audiofile.wav", format="wav")
+
+with sr.AudioFile("path/to/your/audiofile.wav") as source:
+    audio = recognizer.record(source)
+
+    try:hello my mohamad 
+        text = recognizer.recognize_google(audio, language="fa-IR")
+        print("متن: " + text)
+    except sr.UnknownValueError:
+        print("متاسفم، صدای شما رو متوجه نشدم.")
+    except sr.RequestError as e:
+        print("خطا در درخواست؛ {0}".format(e))
